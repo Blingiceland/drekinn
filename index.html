@@ -1,0 +1,246 @@
+<!doctype html>
+<html lang="is">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="description" content="Drekinn: hamborgarar og sjoppa á Njálsgötu 23 í Reykjavík og sjoppa við Dalshraun 13 í Hafnarfirði.">
+<title>Drekinn</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Oswald:wght@500;600&family=Source+Sans+3:ital,wght@0,400;0,600;1,400&display=swap">
+<style>
+  :root {
+    --bg: #0b0b0b;
+    --surface: #151515;
+    --line: #262626;
+    --text: #f3f1ec;
+    --muted: #a39e96;
+    --red: #e42313;
+    --red-dark: #b81a0e;
+    --display: "Oswald", "Arial Narrow", Impact, sans-serif;
+    --body: "Source Sans 3", "Segoe UI", Helvetica, Arial, sans-serif;
+    color-scheme: dark;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--body);
+    font-size: 17px;
+    line-height: 1.55;
+    -webkit-font-smoothing: antialiased;
+  }
+  a { color: inherit; }
+  img { max-width: 100%; height: auto; display: block; }
+  .wrap { max-width: 1100px; margin-inline: auto; padding-inline: 20px; }
+  h1, h2, h3 { font-family: var(--display); font-weight: 600; letter-spacing: .01em; text-wrap: balance; margin: 0; }
+  h2 { font-size: clamp(1.7rem, 3.5vw, 2.4rem); text-transform: uppercase; line-height: 1.05; }
+  h3 { font-size: 1.45rem; line-height: 1.1; }
+  .eyebrow { font-family: var(--display); font-weight: 500; text-transform: uppercase; letter-spacing: .14em; font-size: .8rem; color: var(--red); }
+  p { margin: 0; }
+  .muted { color: var(--muted); }
+
+  /* Haus */
+  .top { display: flex; flex-direction: column; align-items: center; text-align: center; gap: 6px; padding-block: 36px 28px; }
+  .top img { width: 210px; height: auto; }
+  .top h1 { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); }
+  .top .tagline { font-family: var(--display); font-weight: 500; font-size: 1.35rem; text-transform: uppercase; letter-spacing: .06em; }
+  .top .sub { color: var(--muted); max-width: 40ch; }
+
+  /* Hero-mynd */
+  .hero { position: relative; }
+  .hero img { width: 100%; aspect-ratio: 16 / 9; object-fit: cover; }
+  .hero figcaption { display: flex; justify-content: space-between; gap: 16px; flex-wrap: wrap; padding: 10px 0 0; font-size: .95rem; color: var(--muted); }
+  .hero figcaption strong { color: var(--text); font-weight: 600; }
+
+  section { padding-block: 56px; border-top: 1px solid var(--line); }
+  section.first { border-top: 0; }
+  .section-head { display: flex; flex-direction: column; gap: 6px; margin-bottom: 28px; }
+
+  /* Staðir */
+  .places { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 28px; }
+  .place { background: var(--surface); border: 1px solid var(--line); display: flex; flex-direction: column; }
+  .place .map { position: relative; aspect-ratio: 4 / 3; max-width: 100%; background: #1c1c1c; border-bottom: 1px solid var(--line); overflow: hidden; }
+  .place .map > a { position: absolute; inset: 0; display: block; }
+  .place .map img { width: 100%; height: 100%; object-fit: cover; }
+  .place .map iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; filter: saturate(.85); }
+  .place .map .fallback { position: absolute; z-index: 1; pointer-events: none; left: 0; right: 0; bottom: 0; display: flex; justify-content: space-between; gap: 12px; font-size: .85rem; color: var(--muted); background: rgba(11,11,11,.85); padding: 8px 12px; }
+  .place .map .fallback span { font-family: var(--display); text-transform: uppercase; letter-spacing: .1em; font-size: .75rem; color: var(--red); }
+  .place .body { padding: 22px 22px 24px; display: flex; flex-direction: column; gap: 14px; }
+  .place .kind { color: var(--muted); font-size: 1rem; }
+  .place dl { margin: 0; display: grid; grid-template-columns: max-content 1fr; column-gap: 16px; row-gap: 6px; font-size: 1rem; }
+  .place dt { color: var(--muted); }
+  .place dd { margin: 0; }
+  .place dd a { text-decoration: none; }
+  .place dd a:hover { text-decoration: underline; }
+  .actions { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 6px; }
+  .btn {
+    display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+    min-height: 46px; padding: 0 20px; text-decoration: none;
+    font-family: var(--display); font-weight: 500; text-transform: uppercase; letter-spacing: .08em; font-size: .95rem;
+    border: 1px solid var(--text); color: var(--text); background: transparent;
+  }
+  .btn.primary { background: var(--red); border-color: var(--red); color: #fff; }
+  .btn.primary:hover { background: var(--red-dark); border-color: var(--red-dark); }
+  .btn:hover { background: #222; }
+  .btn:focus-visible, a:focus-visible { outline: 3px solid var(--red); outline-offset: 3px; }
+  .btn svg { width: 16px; height: 16px; }
+
+  /* Umsagnir */
+  .ratings { display: flex; gap: 12px; flex-wrap: wrap; margin-bottom: 28px; }
+  .rating { display: flex; align-items: baseline; gap: 10px; border: 1px solid var(--line); background: var(--surface); padding: 10px 16px; text-decoration: none; }
+  .rating b { font-family: var(--display); font-size: 1.6rem; font-weight: 600; color: var(--red); font-variant-numeric: tabular-nums; }
+  .rating span { color: var(--muted); font-size: .95rem; }
+  .quotes { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; }
+  .quote { border-left: 3px solid var(--red); padding: 4px 0 4px 18px; display: flex; flex-direction: column; gap: 10px; }
+  .quote p { font-size: 1.1rem; line-height: 1.45; text-wrap: pretty; }
+  .quote footer { font-size: .9rem; color: var(--muted); }
+  .quote footer .stars { color: var(--red); letter-spacing: .05em; margin-right: 8px; }
+
+  /* Fótur */
+  .foot { border-top: 1px solid var(--line); padding-block: 32px 44px; display: flex; flex-direction: column; gap: 18px; font-size: .95rem; color: var(--muted); }
+  .foot .links { display: flex; gap: 22px; flex-wrap: wrap; }
+  .foot .links a { text-decoration: none; text-transform: uppercase; font-family: var(--display); letter-spacing: .1em; font-size: .85rem; color: var(--text); }
+  .foot .links a:hover { color: var(--red); }
+
+  @media (max-width: 760px) {
+    body { font-size: 16px; }
+    .places, .quotes { grid-template-columns: 1fr; }
+    section { padding-block: 40px; }
+    .actions .btn { flex: 1 1 140px; }
+  }
+  @media (prefers-reduced-motion: no-preference) {
+    .btn { transition: background-color .15s ease, border-color .15s ease; }
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header class="top">
+    <img src="img/logo.png" alt="Drekinn, síðan 1991" width="492" height="568">
+    <h1>Drekinn</h1>
+    <p class="tagline">Á Njálsgötu og í Hafnarfirði</p>
+    <p class="sub">Hamborgarar, franskar og sjoppa við Hallgrímskirkju. Sjoppa við Dalshraun í Hafnarfirði.</p>
+  </header>
+
+  <figure class="hero">
+    <img src="img/husid.jpg" alt="Rauða húsið á horni Njálsgötu með svörtu Drekinn-skyggni og drekamálverkum" width="1400" height="1050">
+    <figcaption>
+      <span><strong>Njálsgata 23</strong> · rétt neðan við Hallgrímskirkju</span>
+      <span>Síðan 1991</span>
+    </figcaption>
+  </figure>
+
+  <section class="first" id="stadir">
+    <div class="section-head">
+      <span class="eyebrow">Staðirnir</span>
+      <h2>Tveir staðir, einn dreki</h2>
+    </div>
+    <div class="places">
+
+      <article class="place" id="njalsgata">
+        <div class="map">
+          <div class="fallback" aria-hidden="true"><span>Kort</span>Njálsgata 23, 101 Reykjavík</div>
+          <a href="https://www.google.com/maps/place/Drekinn/@64.143885,-21.9262254,17z/data=!4m6!3m5!1s0x48d674ccf10263c9:0x54b7288668581faa!8m2!3d64.143885!4d-21.9262254!16s%2Fg%2F1tx8st2z" target="_blank" rel="noopener" aria-label="Opna kort af Njálsgötu 23 í Google Maps"><img src="img/kort-njalsgata.jpg" alt="Kort: Drekinn á Njálsgötu 23" width="1028" height="774"></a>
+          <iframe title="Kort: Drekinn, Njálsgata 23" loading="lazy" referrerpolicy="no-referrer-when-downgrade" src="https://maps.google.com/maps?q=Drekinn%2C%20Nj%C3%A1lsgata%2023%2C%20101%20Reykjav%C3%ADk&z=16&hl=is&output=embed"></iframe>
+        </div>
+        <div class="body">
+          <div>
+            <h3>Njálsgata</h3>
+            <p class="kind">Hamborgarar og sjoppa</p>
+          </div>
+          <p>Hamborgarastaður og lítil sjoppa með veipvörum, sælgæti og drykkjum. Taktu með eða settu þig við háborðið.</p>
+          <dl>
+            <dt>Heimilisfang</dt><dd>Njálsgata 23, 101 Reykjavík</dd>
+            <dt>Sími</dt><dd><a href="tel:+3545514405">551 4405</a></dd>
+            <dt>Opið</dt><dd>Alla daga 11:00–23:30</dd>
+          </dl>
+          <div class="actions">
+            <a class="btn primary" href="tel:+3545514405">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1.9.4 1.8.7 2.7a2 2 0 0 1-.5 2.1L8 9.8a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.7.7a2 2 0 0 1 1.9 2z"/></svg>
+              Hringja
+            </a>
+            <a class="btn" href="https://www.google.com/maps/dir/?api=1&destination=Drekinn%2C%20Nj%C3%A1lsgata%2023%2C%20101%20Reykjav%C3%ADk" target="_blank" rel="noopener">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 10c0 7-9 13-9 13S3 17 3 10a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+              Vísa leið
+            </a>
+          </div>
+        </div>
+      </article>
+
+      <article class="place" id="hafnarfjordur">
+        <div class="map">
+          <div class="fallback" aria-hidden="true"><span>Kort</span>Dalshraun 13, 220 Hafnarfjörður</div>
+          <a href="https://www.google.com/maps/place/Drekinn+%C3%8D+Hafnarfir%C3%B0i/@64.0797934,-21.9428456,17z/data=!4m6!3m5!1s0x48d60ced80322c6d:0xb2c2b3c84f55c655!8m2!3d64.0797934!4d-21.9428456!16s%2Fg%2F11c6f2r59f" target="_blank" rel="noopener" aria-label="Opna kort af Dalshrauni 13 í Google Maps"><img src="img/kort-hafnarfjordur.jpg" alt="Kort: Drekinn við Dalshraun 13" width="1028" height="774"></a>
+          <iframe title="Kort: Drekinn, Dalshraun 13" loading="lazy" referrerpolicy="no-referrer-when-downgrade" src="https://maps.google.com/maps?q=Drekinn%2C%20Dalshraun%2013%2C%20220%20Hafnarfj%C3%B6r%C3%B0ur&z=16&hl=is&output=embed"></iframe>
+        </div>
+        <div class="body">
+          <div>
+            <h3>Hafnarfjörður</h3>
+            <p class="kind">Sjoppa við Dalshraun</p>
+          </div>
+          <p>Sjoppa með veipvörum, tóbaki, vefjupappír og tengdum fylgihlutum. Gott aðgengi og bílastæði við dyrnar.</p>
+          <dl>
+            <dt>Heimilisfang</dt><dd>Dalshraun 13, 220 Hafnarfjörður</dd>
+            <dt>Sími</dt><dd><a href="tel:+3545554200">555 4200</a></dd>
+            <dt>Opið</dt><dd>Til 23:00</dd>
+          </dl>
+          <div class="actions">
+            <a class="btn primary" href="tel:+3545554200">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1.9.4 1.8.7 2.7a2 2 0 0 1-.5 2.1L8 9.8a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.7.7a2 2 0 0 1 1.9 2z"/></svg>
+              Hringja
+            </a>
+            <a class="btn" href="https://www.google.com/maps/dir/?api=1&destination=Drekinn%2C%20Dalshraun%2013%2C%20220%20Hafnarfj%C3%B6r%C3%B0ur" target="_blank" rel="noopener">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 10c0 7-9 13-9 13S3 17 3 10a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+              Vísa leið
+            </a>
+          </div>
+        </div>
+      </article>
+
+    </div>
+  </section>
+
+
+  <section id="umsagnir">
+    <div class="section-head">
+      <span class="eyebrow">Gestir segja</span>
+      <h2>Ódýrt, gott og fljótt</h2>
+    </div>
+    <div class="ratings">
+      <a class="rating" href="https://www.google.com/maps/place/Drekinn/@64.143885,-21.9262254,17z/data=!4m6!3m5!1s0x48d674ccf10263c9:0x54b7288668581faa!8m2!3d64.143885!4d-21.9262254!16s%2Fg%2F1tx8st2z" target="_blank" rel="noopener"><b>4,6</b><span>Google · Njálsgata · 204 umsagnir</span></a>
+      <a class="rating" href="https://www.google.com/maps/place/Drekinn+%C3%8D+Hafnarfir%C3%B0i/@64.0797934,-21.9428456,17z/data=!4m6!3m5!1s0x48d60ced80322c6d:0xb2c2b3c84f55c655!8m2!3d64.0797934!4d-21.9428456!16s%2Fg%2F11c6f2r59f" target="_blank" rel="noopener"><b>4,7</b><span>Google · Hafnarfjörður</span></a>
+    </div>
+    <div class="quotes">
+      <blockquote class="quote">
+        <p>Frábær matur á góðu verði. Pítan með grænmetisbuffi var full af grænmeti og fylgdi risapoki af frönskum. Kom hratt, heitt og ferskt.</p>
+        <footer><span class="stars" aria-label="5 af 5">★★★★★</span>Sarah · Google</footer>
+      </blockquote>
+      <blockquote class="quote">
+        <p>Tvöfaldi ostborgarinn var einn sá besti sem ég hef fengið í bænum. Strákurinn á grillinu var einstaklega vingjarnlegur.</p>
+        <footer><span class="stars" aria-label="5 af 5">★★★★★</span>Audrey · Google</footer>
+      </blockquote>
+      <blockquote class="quote">
+        <p>Ostborgarinn kom á óvart: safaríkur, frábær sósa og ferskt brauð. Kryddið á frönskunum var svo gott að ég tók afganginn með mér heim til Bandaríkjanna.</p>
+        <footer><span class="stars" aria-label="5 af 5">★★★★★</span>Lora, Boston · Tripadvisor</footer>
+      </blockquote>
+      <blockquote class="quote">
+        <p>Besti staðurinn sem ég fann í Reykjavík fyrir almennilegan skammt á sanngjörnu verði. Og maturinn er góður. Rétt neðan við Hallgrímskirkju.</p>
+        <footer><span class="stars" aria-label="5 af 5">★★★★★</span>Ferðalangur frá Texas · Tripadvisor</footer>
+      </blockquote>
+    </div>
+  </section>
+
+  <footer class="foot">
+    <div class="links">
+      <a href="https://www.facebook.com/DrekinnVapeShop/" target="_blank" rel="noopener">Facebook</a>
+      <a href="https://www.instagram.com/drekinnvapeshop/" target="_blank" rel="noopener">Instagram</a>
+      <a href="https://www.tripadvisor.com/Restaurant_Review-g189970-d7033985-Reviews-Drekinn-Reykjavik_Capital_Region.html" target="_blank" rel="noopener">Tripadvisor</a>
+    </div>
+    <p>Drekinn · Njálsgata 23, 101 Reykjavík · Dalshraun 13, 220 Hafnarfjörður</p>
+    <p>Myndir: gestir á Tripadvisor. Umsagnir eru endursagðar á íslensku.</p>
+  </footer>
+</div>
+</body>
+</html>
